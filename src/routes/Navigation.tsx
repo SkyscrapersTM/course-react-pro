@@ -1,13 +1,6 @@
 import { Suspense } from "react";
-import {
-  BrowserRouter,
-  NavLink,
-  Navigate,
-  Route,
-  Routes,
-} from "react-router-dom";
-import logo from "../assets/react.svg";
-import { routes } from "./routes";
+import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
+import ShoppingPage from "../02-component-patterns/pages/ShoppingPage";
 
 function Navigation() {
   return (
@@ -15,25 +8,22 @@ function Navigation() {
       <BrowserRouter>
         <div className="main-layout">
           <nav>
-            <img src={logo} alt="React Logo" />
+            <div>
+              <h1>REACT COURSE</h1>
+            </div>
             <ul>
-              {routes.map(({ to, name }) => (
-                <li key={to}>
-                  <NavLink
-                    to={to}
-                    className={({ isActive }) => (isActive ? "nav-active" : "")}
-                  >
-                    {name}
-                  </NavLink>
-                </li>
-              ))}
+              <li>
+                <NavLink
+                  to="/shopping"
+                  className={({ isActive }) => (isActive ? "nav-active" : "")}
+                >
+                  Shopping
+                </NavLink>
+              </li>
             </ul>
           </nav>
           <Routes>
-            {routes.map(({ path, Component }) => (
-              <Route key={path} path={path} Component={Component} />
-            ))}
-            <Route path="/*" element={<Navigate to={routes[0].to} replace />} />
+            <Route path="shopping" element={<ShoppingPage />} />
           </Routes>
         </div>
       </BrowserRouter>
