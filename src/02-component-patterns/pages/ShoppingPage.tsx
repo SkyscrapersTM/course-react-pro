@@ -4,6 +4,7 @@ import {
   ProductTitle,
   ProductButtons,
 } from "../components";
+import "../styles/custom-styles.css";
 
 const product = {
   id: "1",
@@ -36,10 +37,25 @@ function ShoppingPage() {
         </ProductCard> 
         */}
 
-        <ProductCard product={product}>
+        <ProductCard product={product} className="bg-dark text-white">
+          <ProductImage className="custom-image" />
+          <ProductTitle />
+          <ProductButtons className="custom-buttons" />
+        </ProductCard>
+
+        <ProductCard
+          product={product}
+          style={{
+            backgroundColor: "lightgray",
+            color: "black",
+            textAlign: "center",
+          }}
+        >
           <ProductImage />
-          <ProductTitle title="" />
-          <ProductButtons />
+          <ProductTitle />
+          <ProductButtons
+            style={{ display: "flex", justifyContent: "center" }}
+          />
         </ProductCard>
       </div>
     </div>
