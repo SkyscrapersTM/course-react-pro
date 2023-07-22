@@ -5,7 +5,7 @@ export interface Product {
 }
 
 export interface ProductContextProps {
-  quantity: number;
+  values: number;
   increaseBy: (value: number) => void;
   product: Product;
 }

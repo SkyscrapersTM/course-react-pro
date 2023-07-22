@@ -1,32 +1,16 @@
-import { useEffect, useRef, useState } from "react";
 import { Product, onChangeArgs } from "../interfaces/interfaces";
 
 interface useProductArgs {
+  onChange: (args: onChangeArgs) => void;
   product: Product;
-  onChange?: (args: onChangeArgs) => void;
-  values?: number;
 }
 
-const useProduct = ({ product, onChange, values = 0 }: useProductArgs) => {
-  const [quantity, setQuantity] = useState<number>(values);
-
-  const isControlled = useRef(!!onChange).current;
-
-  useEffect(() => {
-    setQuantity(values);
-  }, [values]);
-
-  const increaseBy = (value: number) => {
-    if (isControlled && onChange) {
-      return onChange({ quantity: value, product });
-    }
-
-    const newValue = Math.max(quantity + value, 0);
-    setQuantity(newValue);
-    onChange && onChange({ quantity: newValue, product });
+const useProduct = ({ onChange, product }: useProductArgs) => {
+  const increaseBy = (quantity: number) => {
+    onChange({ quantity, product });
   };
 
-  return { quantity, increaseBy };
+  return { increaseBy };
 };
 
 export default useProduct;
