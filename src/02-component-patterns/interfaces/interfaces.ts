@@ -5,7 +5,12 @@ export interface Product {
 }
 
 export interface ProductContextProps {
-  counter: number;
+  quantity: number;
   increaseBy: (value: number) => void;
   product: Product;
+}
+
+export interface onChangeArgs {
+  product: Product;
+  quantity: number;
 }

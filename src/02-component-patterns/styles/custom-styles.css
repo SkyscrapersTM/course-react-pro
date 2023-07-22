@@ -1,9 +1,7 @@
-.bg-dark {
+.custom-card {
   background-color: rgb(56, 56, 56);
-}
-
-.text-white {
   color: white;
+  text-align: center;
 }
 
 .custom-image {
@@ -12,7 +10,19 @@
   width: calc(100% - 20px);
 }
 
-.custom-buttons button, .custom-buttons div {
+.custom-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.custom-buttons button,
+.custom-buttons div {
   border-color: white;
   color: white;
+}
+
+.shopping-cart {
+  position: fixed;
+  right: 10px;
+  top: 0;
 }
