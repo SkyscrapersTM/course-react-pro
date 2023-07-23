@@ -1,35 +1,36 @@
-import { useContext, CSSProperties } from "react";
-import noImage from "../assets/no-image.jpg";
-import styles from "../styles/styles.module.css";
-import { ProductContext } from "./ProductCard";
+import { useContext } from 'react';
+import { ProductContext } from './ProductCard';
 
-interface Props {
-  className?: string;
-  img?: string;
-  style?: CSSProperties;
+import styles from '../styles/styles.module.css'
+import noImage from '../assets/no-image.jpg';
+
+export interface Props {
+    img?: string;
+    className?: string;
+    style?: React.CSSProperties 
 }
 
-export function ProductImage({ className, img, style }: Props) {
-  const { product } = useContext(ProductContext);
 
-  let imgToShow: string;
+export const ProductImage = ({ img, className, style }: Props ) => {
 
-  if (img) {
-    imgToShow = img;
-  } else if (product.img) {
-    imgToShow = product.img;
-  } else {
-    imgToShow = noImage;
-  }
+    const { product } = useContext( ProductContext );
+    let imgToShow: string;
 
-  return (
-    <img
-      className={`${styles.productImg} ${className}`}
-      src={imgToShow}
-      alt="Product"
-      style={style}
-    />
-  );
+    if ( img ) {
+        imgToShow = img;
+    } else if ( product.img ) {
+        imgToShow = product.img
+    } else {
+        imgToShow = noImage;
+    }
+
+
+    return (
+        <img 
+            className={ `${ styles.productImg } ${ className }` } 
+            src={ imgToShow } 
+            style={ style }
+            alt="Product" 
+        />
+    );
 }
-
-export default ProductImage;
