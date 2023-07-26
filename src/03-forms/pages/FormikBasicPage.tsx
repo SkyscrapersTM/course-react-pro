@@ -14,13 +14,13 @@ function FormikBasicPage() {
     if (!firstName) {
       errors.firstName = "First name is required";
     } else if (firstName.length > 15) {
-      errors.firstName = "First name must be at most 15 characters long";
+      errors.firstName = "First name must be 15 characters or less";
     }
 
     if (!lastName) {
       errors.lastName = "Last name is required";
     } else if (lastName.length > 10) {
-      errors.lastName = "Last name must be at least 15 characters long";
+      errors.lastName = "Last name must be at least 15 characters or less";
     }
 
     if (!email) {
@@ -34,17 +34,18 @@ function FormikBasicPage() {
     return errors;
   };
 
-  const { handleSubmit, handleChange, values } = useFormik({
-    initialValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-    },
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
-    validate,
-  });
+  const { values, errors, touched, handleSubmit, handleChange, handleBlur } =
+    useFormik({
+      initialValues: {
+        firstName: "",
+        lastName: "",
+        email: "",
+      },
+      onSubmit: (values) => {
+        alert(JSON.stringify(values, null, 2));
+      },
+      validate,
+    });
 
   return (
     <div>
@@ -56,28 +57,32 @@ function FormikBasicPage() {
           type="text"
           name="firstName"
           onChange={handleChange}
+          onBlur={handleBlur}
           value={values.firstName}
         />
-        <span>First name is required</span>
+        {touched.firstName && errors.firstName && (
+          <span>{errors.firstName}</span>
+        )}
 
         <label htmlFor="lastName">Last Name</label>
         <input
           type="text"
           name="lastName"
           onChange={handleChange}
+          onBlur={handleBlur}
           value={values.lastName}
         />
-        <span>Last name is required</span>
+        {touched.lastName && errors.lastName && <span>{errors.lastName}</span>}
 
         <label htmlFor="email">Email</label>
         <input
           type="email"
           name="email"
           onChange={handleChange}
+          onBlur={handleBlur}
           value={values.email}
         />
-        <span>Email is required</span>
-        <span>Check for an valid email format</span>
+        {touched.email && errors.email && <span>{errors.email}</span>}
 
         <button type="submit">Submit</button>
       </form>
